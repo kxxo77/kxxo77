@@ -426,11 +426,6 @@ document.querySelectorAll("[data-command]").forEach((button) => {
   });
 });
 
-document.querySelector("#fontFamily").addEventListener("change", (event) => {
-  diaryEditor.focus();
-  document.execCommand("fontName", false, event.target.value);
-});
-
 document.querySelector("#fontSize").addEventListener("change", (event) => {
   diaryEditor.focus();
   document.execCommand("fontSize", false, event.target.value);

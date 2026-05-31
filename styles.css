@@ -614,7 +614,7 @@ select:focus,
 
 .format-toolbar {
   display: grid;
-  grid-template-columns: minmax(105px, 1.1fr) minmax(82px, 0.8fr) repeat(6, 42px) repeat(2, 48px);
+  grid-template-columns: minmax(92px, 1fr) repeat(6, 42px) repeat(2, 48px);
   gap: 8px;
   margin-bottom: 12px;
 }
