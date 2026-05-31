@@ -1,4 +1,4 @@
-# Noir Diary
+# My Diary
 
 순수 HTML, CSS, JavaScript로 만든 다이어리형 일기장 앱입니다. GitHub Pages에 그대로 배포할 수 있으며, 기록은 브라우저의 로컬 저장소에 보관됩니다.
 
