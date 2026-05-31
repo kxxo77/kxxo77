@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Diary</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <section class="cover-page" id="coverPage" aria-label="표지">
+      <div class="cover-noise"></div>
+      <p class="cover-kicker left">private archive</p>
+      <p class="cover-kicker right">daily memory platform</p>
+      <div class="cover-orbit orbit-a"><span></span></div>
+      <div class="cover-orbit orbit-b"><span></span></div>
+      <div class="cover-orbit orbit-c"><span></span></div>
+      <div class="cover-cluster">
+        <i></i><i></i><i></i>
+      </div>
+      <h1 class="cover-title">My Diary</h1>
+      <button class="enter-button" id="enterButton" type="button" aria-label="다이어리로 이동">
+        <span>→</span>
+      </button>
+    </section>
+
+    <div class="app-shell is-hidden" id="appShell">
+      <header class="topbar">
+        <button class="back-button" id="backToCoverButton" type="button" aria-label="표지로 돌아가기">←</button>
+        <div>
+          <p class="eyebrow">Private Daily Log</p>
+          <h1>My Diary</h1>
+        </div>
+        <div class="topbar-actions">
+          <button class="ghost-button" id="todayButton" type="button">오늘</button>
+          <button class="primary-button" id="newEntryButton" type="button">새 기록</button>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <section class="calendar-panel" aria-label="캘린더">
+          <div class="calendar-head">
+            <button class="icon-button" id="prevMonth" type="button" aria-label="이전 달">‹</button>
+            <div>
+              <h2 id="monthLabel"></h2>
+              <p id="selectedDateLabel"></p>
+            </div>
+            <button class="icon-button" id="nextMonth" type="button" aria-label="다음 달">›</button>
+          </div>
+          <div class="weekdays" aria-hidden="true">
+            <span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
+          </div>
+          <div class="calendar-grid" id="calendarGrid"></div>
+        </section>
+
+        <section class="editor-panel" aria-label="일기 작성">
+          <div class="entry-meta">
+            <div>
+              <p class="eyebrow">Selected Day</p>
+              <h2 id="editorDateLabel"></h2>
+            </div>
+            <div class="meta-pills">
+              <span id="anniversaryPill">일정 없음</span>
+              <span id="todoPill">할 일 0개</span>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <label for="anniversaryInput">일정</label>
+            <input id="anniversaryInput" type="text" placeholder="예: 전시 관람, 병원 예약" />
+          </div>
+
+          <div class="todo-box">
+            <div class="section-title">
+              <label for="todoInput">해야 할 일</label>
+              <button class="ghost-button compact" id="addTodoButton" type="button">추가</button>
+            </div>
+            <input id="todoInput" type="text" placeholder="오늘 정리할 일을 입력" />
+            <ul class="todo-list" id="todoList"></ul>
+          </div>
+
+          <div class="emoji-section" aria-label="오늘의 기분">
+            <label>오늘의 기분</label>
+            <div class="emoji-strip">
+              <button class="emoji-button" type="button" data-emoji="🙂">🙂</button>
+              <button class="emoji-button" type="button" data-emoji="😌">😌</button>
+              <button class="emoji-button" type="button" data-emoji="😐">😐</button>
+              <button class="emoji-button" type="button" data-emoji="😵">😵</button>
+              <button class="emoji-button" type="button" data-emoji="😢">😢</button>
+              <button class="emoji-button" type="button" data-emoji="😡">😡</button>
+            </div>
+          </div>
+
+          <div class="format-toolbar" aria-label="텍스트 조절">
+            <select id="fontFamily" aria-label="글꼴">
+              <option value="'Pretendard', 'Segoe UI', sans-serif">Sans</option>
+              <option value="Georgia, 'Times New Roman', serif">Serif</option>
+              <option value="'Courier New', monospace">Mono</option>
+            </select>
+            <select id="fontSize" aria-label="글자 크기">
+              <option value="3">기본</option>
+              <option value="4">크게</option>
+              <option value="5">제목</option>
+              <option value="2">작게</option>
+            </select>
+            <button type="button" data-command="bold" aria-label="굵게">B</button>
+            <button type="button" data-command="italic" aria-label="기울임">I</button>
+            <button type="button" data-command="underline" aria-label="밑줄">U</button>
+            <button type="button" data-command="insertUnorderedList" aria-label="목록">•</button>
+            <button type="button" data-command="justifyLeft" aria-label="왼쪽 정렬">≡</button>
+            <button type="button" data-command="justifyCenter" aria-label="가운데 정렬">≣</button>
+            <label class="color-tool" aria-label="글자 색">
+              <span>A</span>
+              <input id="foreColor" type="color" value="#f4f4f4" />
+            </label>
+            <label class="color-tool" aria-label="형광펜">
+              <span>▰</span>
+              <input id="hiliteColor" type="color" value="#00ffe0" />
+            </label>
+          </div>
+
+          <div
+            class="editor"
+            id="diaryEditor"
+            contenteditable="true"
+            data-placeholder="오늘 있었던 일, 일정, 기억하고 싶은 장면을 적어 보세요."
+            aria-label="일기 본문"
+          ></div>
+
+          <div class="media-tools">
+            <div class="drop-zone" id="dropZone">
+              <input id="imageInput" type="file" accept="image/*" multiple />
+              <label for="imageInput">이미지를 끌어오거나 클릭해서 첨부</label>
+            </div>
+            <button class="ghost-button camera-button" id="openCameraButton" type="button">웹캠 촬영</button>
+          </div>
+          <div class="image-gallery" id="imageGallery"></div>
+        </section>
+      </main>
+    </div>
+
+    <dialog class="day-dialog" id="dayDialog">
+      <form method="dialog">
+        <button class="dialog-back-button" value="cancel" type="submit" aria-label="닫기">←</button>
+        <p class="eyebrow">Choose Entry Type</p>
+        <h2 id="dialogDateLabel"></h2>
+        <div class="dialog-actions">
+          <button value="anniversary" type="submit">일정 설정</button>
+          <button value="todo" type="submit">할 일 작성</button>
+          <button value="diary" type="submit">일기 쓰기</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog class="camera-dialog" id="cameraDialog">
+      <form method="dialog">
+        <div class="camera-head">
+          <div>
+            <p class="eyebrow">Camera</p>
+            <h2>사진 촬영</h2>
+          </div>
+          <button class="icon-button" id="closeCameraButton" value="close" type="submit" aria-label="닫기">×</button>
+        </div>
+        <video id="cameraVideo" autoplay playsinline></video>
+        <canvas id="cameraCanvas" hidden></canvas>
+        <div class="dialog-actions">
+          <button id="captureButton" type="button">찍어서 첨부</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script src="script.js"></script>
+  </body>
+</html>
